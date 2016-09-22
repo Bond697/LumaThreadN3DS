@@ -19,7 +19,7 @@ int main()
 {
     __asm("push {r4-r7 , lr}      \n\t"
           "sub sp, sp, #8         \n\t"
-	      "bl call_cp15			  \n\t"
+	      "bl call_cp15		      \n\t"
           );
 
     __asm("MOV     R3, #63                    \n\t"
