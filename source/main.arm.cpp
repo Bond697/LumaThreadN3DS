@@ -19,18 +19,18 @@ int main()
 {
     __asm("push {r4-r7 , lr}      \n\t"
           "sub sp, sp, #8         \n\t"
-		  "bl call_cp15			  \n\t"
+	      "bl call_cp15			  \n\t"
           );
 
     __asm("MOV     R3, #63                    \n\t"
           "STR     R3, [SP]                   \n\t"
           "LDR     R3, =0xFFFFFFFE            \n\t"
           "STR     R3, [SP, #4]               \n\t"
-          "LDR     R0, =0x1FFF004             \n\t"
+          "LDR     R0, =0x1FFFFFC             \n\t"
           "LDR     R1, =_Z13RunningThreadv    \n\t"
           "MOV     R2, #0                     \n\t"
           "LDR     R7, =CreateThread          \n\t"
-          "LDR     R3, =0x1FFF000             \n\t"
+          "LDR     R3, =0x1FFFFF8             \n\t"
           "BLX     R7                         \n\t"
           );
 
@@ -50,6 +50,9 @@ void RunningThread()
 {
     memset(fh, 0, sizeof(fh));
     u32 bytes;
+
+	vu8* g_kernel_devmode = (vu8*)0x1FFED00A;
+	*g_kernel_devmode = 1;
 
     while (1)
     {
@@ -79,7 +82,7 @@ void RunningThread()
 			FileClose(fh);
 
         }
-        __asm("ldr r0, =0x80000   \n\t"
+        __asm("ldr r0, =0x80000    \n\t"
               "mov r1, #0          \n\t"
               "svc 0x0A            \n\t");
     }
