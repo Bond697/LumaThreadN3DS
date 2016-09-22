@@ -108,7 +108,7 @@ $(BUILD):
 #---------------------------------------------------------------------------------
 clean:
 	@echo clean ...
-	@rm -fr $(BUILD) $(TARGET).elf $(TARGET).nds $(TARGET).bin $(TARGET).sym $(SOUNDBANK)
+	@rm -fr $(BUILD) $(TARGET).elf $(TARGET).bin $(TARGET).sym thread.bin
  
 #---------------------------------------------------------------------------------
 else
