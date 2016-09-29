@@ -38,8 +38,8 @@ int main()
           "pop {r4-r7}            \n\t"
           "pop {r0}               \n\t"
           "mov lr, r0             \n\t"
-          "ldr r0, =0x080E3448    \n\t"
-          "ldr r1, =0x08085270    \n\t"
+          "ldr r0, =0x080E3448    \n\t"  //80CB3C8 o3ds
+          "ldr r1, =0x08085270    \n\t"  //8085274
           "bx r1                  \n\t"
           );
 
@@ -51,12 +51,9 @@ void RunningThread()
     memset(fh, 0, sizeof(fh));
     u32 bytes;
 
-	vu8* g_kernel_devmode = (vu8*)0x1FFED00A;
-	*g_kernel_devmode = 1;
-
     while (1)
     {
-        if ( KeysPressed(KEY_L | KEY_A))
+        if ( KeysPressed(KEY_L | KEY_A) )
         {
             
 			FileOpen(fh, L"sdmc:/dump_arm9.bin", MODE_WRITE | MODE_CREATE);
